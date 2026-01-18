@@ -80,7 +80,7 @@ docker images -a
 ```
 
 ```bash
-docker run -d -p 8501:8501 entbappy/stapp 
+docker run -d -p 8501:8501 prite/book
 ```
 
 ```bash
@@ -100,15 +100,15 @@ docker login
 ```
 
 ```bash
-docker push entbappy/stapp:latest 
+docker push prite/book:latest 
 ```
 
 ```bash
-docker rmi entbappy/stapp:latest
+docker rmi prite/book:latest 
 ```
 
 ```bash
-docker pull entbappy/stapp
+docker pull prite/book
 ```
 
 
