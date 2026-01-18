@@ -72,8 +72,8 @@ git clone "your-project"
 ```
 
 ```bash
-docker build -t entbappy/stapp:latest . 
-```
+docker build -t prite/book:latest .
+
 
 ```bash
 docker images -a  
