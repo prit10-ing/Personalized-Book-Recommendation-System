@@ -4,3 +4,4 @@ scikit-learn
 streamlit
 -e .
 PyYAML
+six
