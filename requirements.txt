@@ -3,3 +3,5 @@ altair==4.2.2
 numpy
 pandas
 scikit-learn
+PyYAML
+six
