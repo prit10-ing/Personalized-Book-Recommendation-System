@@ -1,14 +1,21 @@
-# Python 3.7 (no apt-get)
-FROM python:3.7-slim
+# Use lightweight python
+FROM python:3.12-slim
 
+# Prevent python from buffering logs
+ENV PYTHONUNBUFFERED=1
+
+# Set working directory
 WORKDIR /app
 
+# Install dependencies first (better caching)
 COPY requirements.txt .
-
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy project
 COPY . .
 
-EXPOSE 8501
+# Flask default port
+EXPOSE 5000
 
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+# Run app
+CMD ["python", "app.py"]

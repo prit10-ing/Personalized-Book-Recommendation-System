@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="hero">
+    <h1>📚 Personalized Book Recommendation</h1>
+    <p>Discover books you’ll love using Machine Learning</p>
+</section>
+
+{% if message %}
+<div class="alert">{{message}}</div>
+{% endif %}
+
+<section class="controls">
+    <form method="POST">
+        <button class="btn glow" name="train">🚀 Train System</button>
+    </form>
+
+    <form method="POST" class="recommend">
+        <select name="book">
+            {% for book in book_names %}
+            <option value="{{book}}">{{book}}</option>
+            {% endfor %}
+        </select>
+        <button class="btn primary" name="recommend">✨ Recommend</button>
+    </form>
+</section>
+
+{% if recommended %}
+<h2 class="section-title">Recommended For You</h2>
+
+<div class="cards">
+    {% for i in range(1,6) %}
+    <div class="card">
+        <img src="{{posters[i]}}">
+        <h3>{{recommended[i]}}</h3>
+
+        <form method="POST">
+            <button class="btn fav" name="favorite" value="{{recommended[i]}}">
+                ❤️ Save
+            </button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<h2 class="section-title">❤️ Favorites</h2>
+
+{% if favorites %}
+<div class="favorites">
+    {% for book in favorites %}
+        <span>{{book}}</span>
+    {% endfor %}
+</div>
+{% else %}
+<p class="muted">Nothing saved yet</p>
+{% endif %}
+
+{% endblock %}
