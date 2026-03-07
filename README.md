@@ -1,119 +1,160 @@
-# Personalized-Book-Recommendation-System
+# 📚 Personalized Book Recommendation System
+
+A **Collaborative Filtering–based Book Recommendation System** built using **Machine Learning**.
+This project recommends books to users based on similarity between user preferences using the **K-Nearest Neighbors (KNN) algorithm**.
+
+The system analyzes historical user-book interactions and identifies similar books using collaborative filtering techniques.
+
+---
+
+# 🚀 Features
+
+* 📖 Personalized book recommendations
+* 🤖 Machine Learning–based recommendation system
+* 🔎 Uses **K-Nearest Neighbors (KNN)** similarity algorithm
+* ❤️ Favorite books saving system
+* 🌐 Interactive web interface using **Flask**
+* ⚡ Fast recommendations using pre-trained model
+
+---
+
+# 🧠 Machine Learning Approach
+
+This project uses **Collaborative Filtering**, which recommends books based on user interaction patterns.
+
+### Steps used in the model
+
+1. Collect user-book rating dataset
+2. Clean and preprocess the data
+3. Create a **User–Book Pivot Table**
+4. Convert pivot table to sparse matrix
+5. Train **K-Nearest Neighbors model**
+6. Serialize trained model using **Pickle**
+7. Use the model to recommend similar books
+
+### Algorithm Used
+
+**K-Nearest Neighbors (KNN)**
+
+The model finds the most similar books by measuring distance between book vectors in the pivot table.
+
+Similarity is calculated using:
+
+* **/ Euclidean Distance**
+
+The system returns the **top 5 most similar books** to the selected book.
+
+---
+
+# 🛠 Tech Stack
+
+* Python
+* Flask
+* Scikit-learn
+* Pandas
+* NumPy
+* HTML / CSS
+* Pickle
+* Docker (optional for deployment)
+
+---
 
 
+---
 
-## Workflow
+# ⚙️ Installation
 
-- config.yaml
-- entity
-- config/configuration.py
-- components
-- pipeline
-- main.py
-- app.py
+### 1️⃣ Clone the repository
 
-
-# How to run?
-### STEPS:
-
-Clone the repository
-
-```bash
-https://github.com/entbappy/End-to-End-Book-Recommender-System.git
 ```
-### STEP 01- Create a conda environment after opening the repository
-
-```bash
-conda create -n books python=3.7.10 -y
+git clone https://github.com/your-username/book-recommendation-system.git
 ```
 
-```bash
-conda activate books
+```
+cd book-recommendation-system
 ```
 
+---
 
-### STEP 02- install the requirements
-```bash
+### 2️⃣ Create virtual environment
+
+```
+python -m venv venv
+```
+
+Activate environment
+
+**Windows**
+
+```
+venv\Scripts\activate
+```
+
+**Mac/Linux**
+
+```
+source venv/bin/activate
+```
+
+---
+
+### 3️⃣ Install dependencies
+
+```
 pip install -r requirements.txt
 ```
 
+---
+RUN main.py file 
 
-Now run,
-```bash
-streamlit run app.py
+
+# ▶️ Run the Application
+
+Run the Flask application:
+
+```
+python app.py
 ```
 
+The application will start on:
 
-# Streamlit app Docker Image Deployment
-
-## 1. Login with your AWS console and launch an EC2 instance
-## 2. Run the following commands
-
-Note: Do the port mapping to this port:- 8501
-
-```bash
-sudo apt-get update -y
-
-sudo apt-get upgrade
-
-#Install Docker
-
-curl -fsSL https://get.docker.com -o get-docker.sh
-
-sudo sh get-docker.sh
-
-sudo usermod -aG docker ubuntu
-
-newgrp docker
+```
+http://localhost:5000
 ```
 
-```bash
-git clone "your-project"
-```
+Open the URL in your browser and start getting book recommendations.
 
-```bash
-docker build -t prite/book:latest .
+---
 
-
-```bash
-docker images -a  
-```
-
-```bash
-docker run -d -p 8501:8501 prite/book
-```
-
-```bash
-docker ps  
-```
-
-```bash
-docker stop container_id
-```
-
-```bash
-docker rm $(docker ps -a -q)
-```
-
-```bash
-docker login 
-```
-
-```bash
-docker push prite/book:latest 
-```
-
-```bash
-docker rmi prite/book:latest 
-```
-
-```bash
-docker pull prite/book
-```
+# 🌐 Deployment
 
 
+For deployment, the trained model files (`.pkl`) are stored inside the **artifacts folder**, so the system loads the model directly without retraining.
 
+---
 
+# 📸 Demo
 
+Users can:
 
+1. Select a book
+2. Click **Recommend**
+3. Get top recommended books
+4. Save favorite books
 
+---
+
+# 📌 Future Improvements
+
+* Add user login system
+* Improve recommendation accuracy
+* Add hybrid recommendation system
+* Use deep learning recommendation models
+
+---
+
+# 👨‍💻 Author
+
+**Pritesh**
+
+Data Science Enthusiast | Machine Learning Developer
