@@ -21,18 +21,12 @@
         <div class="alert">{{ message }}</div>
     {% endif %}
 
-    <!-- ACTIONS -->
+    <!-- CONTROLS -->
     <div class="controls">
-
-        <!-- TRAIN -->
-        <form method="POST">
-            <button class="btn glow" name="action" value="train">
-                🚀 Train System
-            </button>
-        </form>
 
         <!-- RECOMMEND -->
         <form method="POST" class="recommend">
+
             <select name="book">
                 {% for book in book_names %}
                     <option value="{{book}}">{{book}}</option>
@@ -42,6 +36,7 @@
             <button class="btn primary" name="action" value="recommend">
                 ✨ Recommend
             </button>
+
         </form>
 
     </div>
@@ -53,6 +48,7 @@
     <div class="cards">
         {% for i in range(1,6) %}
         <div class="card">
+
             <img src="{{ posters[i] }}" alt="poster">
             <h3>{{ recommended[i] }}</h3>
 
@@ -62,6 +58,7 @@
                     ❤️ Save
                 </button>
             </form>
+
         </div>
         {% endfor %}
     </div>

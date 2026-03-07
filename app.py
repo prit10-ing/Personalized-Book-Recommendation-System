@@ -4,8 +4,6 @@ import numpy as np
 from flask import Flask, render_template, request, session
 
 from books_recommender.config.configuration import AppConfiguration
-from books_recommender.pipeline.training_pipeline import TrainingPipeline
-
 
 # =====================================================
 # APP INIT
@@ -32,14 +30,18 @@ class Recommendation:
             self.book_pivot = pickle.load(
                 open(self.config.book_pivot_serialized_objects, "rb")
             )
+
             self.final_rating = pickle.load(
                 open(self.config.final_rating_serialized_objects, "rb")
             )
+
             print("✅ Base recommendation objects loaded")
+
         except Exception as e:
             print("❌ Failed loading base objects:", e)
 
     def fetch_poster(self, suggestion):
+
         posters = []
         names = [self.book_pivot.index[i] for i in suggestion[0]]
 
@@ -55,6 +57,7 @@ class Recommendation:
         return posters
 
     def recommend(self, book_name):
+
         model_path = self.config.trained_model_path
 
         if not os.path.exists(model_path):
@@ -63,6 +66,7 @@ class Recommendation:
         try:
             model = pickle.load(open(model_path, "rb"))
             book_id = np.where(self.book_pivot.index == book_name)[0][0]
+
         except Exception:
             return None, None
 
@@ -86,10 +90,10 @@ rec_engine = Recommendation()
 # =====================================================
 @app.route("/", methods=["GET", "POST"])
 def home():
+
     if "favorites" not in session:
         session["favorites"] = []
 
-    # Load book names
     try:
         book_names = pickle.load(open("templates/book_names.pkl", "rb"))
     except Exception:
@@ -100,27 +104,21 @@ def home():
     message = None
 
     if request.method == "POST":
+
         action = request.form.get("action")
 
-        # ---------------- TRAIN ----------------
-        if action == "train":
-            try:
-                pipe = TrainingPipeline()
-                pipe.start_training_pipeline()
-                message = "Training completed successfully!"
-            except Exception:
-                message = "Training failed. Check logs."
-
         # ---------------- RECOMMEND ----------------
-        elif action == "recommend":
+        if action == "recommend":
+
             selected = request.form.get("book")
             recommended, posters = rec_engine.recommend(selected)
 
             if recommended is None:
-                message = "Model not available. Train first."
+                message = "Model not available."
 
         # ---------------- FAVORITE ----------------
         elif action == "favorite":
+
             book = request.form.get("book")
             favs = session["favorites"]
 
@@ -140,7 +138,7 @@ def home():
 
 
 # =====================================================
-# HEALTH CHECK (Render loves this)
+# HEALTH CHECK (Render friendly)
 # =====================================================
 @app.route("/health")
 def health():
@@ -148,13 +146,14 @@ def health():
 
 
 # =====================================================
-# LOCAL RUN
+# RUN
 # =====================================================
 if __name__ == "__main__":
+
     port = int(os.environ.get("PORT", 5000))
 
     print("\n" + "=" * 60)
     print(f"🚀 BOOK RECOMMENDER RUNNING ON PORT {port}")
     print("=" * 60 + "\n")
 
-    app.run(host="0.0.0.0", port=port, debug=True,use_reloader=False)
+    app.run(host="0.0.0.0", port=port, debug=True, use_reloader=False)

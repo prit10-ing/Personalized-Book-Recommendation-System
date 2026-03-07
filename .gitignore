@@ -219,14 +219,13 @@ venv/
 # VS Code
 .vscode/
 
-# Artifacts / models
-artifacts/
+artifacts/dataset
 
 # Jupyter
 .ipynb_checkpoints/
 
 # OS
 .DS_Store
-
+notebook
 # Env variables
 .env
